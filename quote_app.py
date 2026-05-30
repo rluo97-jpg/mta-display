@@ -1,10 +1,15 @@
 from flask import Flask, jsonify
 import json
 import random
+import os
 
 app = Flask(__name__)
 
-with open("highlights.json", encoding="utf-8") as f:
+# Load highlights using the directory of this file
+base_dir = os.path.dirname(os.path.abspath(__file__))
+highlights_path = os.path.join(base_dir, "highlights.json")
+
+with open(highlights_path, encoding="utf-8") as f:
     highlights = json.load(f)
 
 @app.route("/quote")
